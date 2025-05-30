@@ -1,101 +1,189 @@
+// app/page.tsx
+"use client";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { Changa } from "next/font/google";
+import Loading from "./components/Loading";
+import LanguageSelectionModal from "./components/LanguageSelectionModal";
+
+// Initialize the font
+const changa = Changa({
+  subsets: ["arabic", "latin"], // Ajout du sous-ensemble latin pour le français et l'anglais
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+// Define language type
+type LanguageKey = "arabic" | "french" | "english";
+
+// Define content type
+type ContentType = {
+  [key in LanguageKey]: {
+    titleFirstLine: string;
+    titleSecondLine: string;
+    lines: string[];
+    button: string;
+  };
+};
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  // State to track page loading
+  const [pageLoading, setPageLoading] = useState(true);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // State for language selection modal
+  const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false);
+
+  // Content in different languages
+  const content: ContentType = {
+    arabic: {
+      titleFirstLine: "الايام",
+      titleSecondLine: "الطبية الجراحية",
+      lines: [
+        "من 17 الى 24 ماي 2025",
+        "توأمة بين الشفاء",
+        "والمؤسسة العمومية الاستشفائية مغنية",
+        "بالتنسيق مع جمعية سنابل الخير مغنية",
+      ],
+      button: "سجل الآن",
+    },
+    french: {
+      titleFirstLine: "Journées",
+      titleSecondLine: "Médico-Chirurgicales",
+      lines: [
+        "du 17 au 24 mai 2025",
+        "jumellage entre l'ashifa",
+        "et l'Établissement Public Hospitalier de Maghnia",
+        "en coordination avec l'association sanabil el kheir",
+      ],
+      button: "Inscrivez-vous",
+    },
+    english: {
+      titleFirstLine: "Medical",
+      titleSecondLine: "Surgical Days",
+      lines: [
+        "from May 17 to 24, 2025",
+        "twinning between Al-Shifa",
+        "and Maghnia Public Hospital",
+        "in coordination with Sanabil El Khair Association",
+      ],
+      button: "Register Now",
+    },
+  };
+
+  // State to track current language
+  const [currentLang, setCurrentLang] = useState<LanguageKey>("arabic");
+
+  // Effect to change language every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentLang((prev) => {
+        if (prev === "arabic") return "french";
+        if (prev === "french") return "english";
+        return "arabic";
+      });
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Effect to initialize audio and handle page loading
+  useEffect(() => {
+    // Simulate page loading (remove this setTimeout in production and use actual loading logic)
+    const timer = setTimeout(() => {
+      setPageLoading(false);
+    }, 1000);
+
+    // Cleanup
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  // Handle button click
+  const handleButtonClick = () => {
+    // Open language selection modal
+    setIsLanguageModalOpen(true);
+  };
+
+  // Direction based on language
+  const isRTL = currentLang === "arabic";
+
+  // Show page loading state
+  if (pageLoading) {
+    return <Loading />;
+  }
+
+  return (
+    <div
+      className={`flex items-center justify-center min-h-screen w-full bg-gradient-to-br from-[#ffffff] to-white dark:from-[#1A2213] dark:to-black p-4 ${changa.className}`}
+    >
+      <main className="main-container">
+        {/* SVG Image with Pulse Animation */}
+        <div className="pulse-container">
+          <Image
+            className="pulse-image"
+            src="/images/ashifa.svg"
+            alt="Center SVG"
+            width={180}
+            height={180}
+            priority
+          />
         </div>
+
+        {/* Title with Fade-in Animation - Split into two lines */}
+        <div className="title-container">
+          <div
+            className={`rtl-support text-2xl md:text-2xl font-bold text-[#647F2F] dark:text-[#7B934C] fade-in drop-shadow-md transition-opacity duration-500 delay-300 ${
+              isRTL ? "rtl" : "ltr"
+            }`}
+          >
+            <div className="title-line">
+              {content[currentLang].titleFirstLine}
+            </div>
+            <div className="title-line">
+              {content[currentLang].titleSecondLine}
+            </div>
+          </div>
+        </div>
+
+        {/* Description with Fade-in Animation */}
+        <div className="description-container">
+          <div
+            className={`flex flex-col items-center justify-center fade-in delay-600 ${
+              isRTL ? "rtl" : "ltr"
+            }`}
+          >
+            {content[currentLang].lines.map((line, index) => (
+              <p
+                key={index}
+                className={`text-lg md:text-xl ${
+                  index === 0
+                    ? "bg-gradient-to-r from-[#e9ebe6]/20 to-[#7B934C]/20 px-4 py-1 rounded-full font-semibold text-[#e70606b3] dark:text-[#E7EFCB] shadow-inner highlight-date"
+                    : "text-[#647F2F] dark:text-[#E7EFCB]"
+                } leading-tight my-1`}
+              >
+                {line}
+              </p>
+            ))}
+          </div>
+        </div>
+
+        {/* Button with 3D Hover Effect */}
+        <button
+          onClick={handleButtonClick}
+          className={`consistent-button bg-[#7B934C] hover:bg-[#647F2F] text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 text-lg shadow-[0_4px_12px_rgba(100,127,47,0.5)] hover:shadow-[0_8px_16px_rgba(100,127,47,0.6)] transform hover:-translate-y-1 fade-in delay-900 ${
+            isRTL ? "rtl" : "ltr"
+          }`}
+        >
+          {content[currentLang].button}
+        </button>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      {/* Language Selection Modal */}
+      <LanguageSelectionModal
+        isOpen={isLanguageModalOpen}
+        onClose={() => setIsLanguageModalOpen(false)}
+      />
     </div>
   );
 }

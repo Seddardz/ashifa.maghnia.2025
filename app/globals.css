@@ -1,27 +1,196 @@
+/* app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Main container styling */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 100%;
+  max-width: 42rem;
+  margin: 0 auto;
+  text-align: center;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 20px 50px rgba(100, 127, 47, 0.3);
+  transform: translateZ(0);
+  transition: all 0.3s;
+  height: 600px;
 }
 
+.main-container:hover {
+  box-shadow: 0 25px 60px rgba(100, 127, 47, 0.4);
+}
+
+/* Dark mode adjustments */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  .main-container {
+    background-color: #1a2213;
+    box-shadow: 0 20px 50px rgba(231, 239, 203, 0.2);
+  }
+
+  .main-container:hover {
+    box-shadow: 0 25px 60px rgba(231, 239, 203, 0.3);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* Pulse animation for SVG image */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Apply pulse animation to SVG image */
+.pulse-image {
+  animation: pulse 3s ease-in-out infinite;
+  filter: drop-shadow(0 4px 6px rgba(204, 234, 15, 0.25));
+}
+
+/* Fade-in animation with slight upward movement */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply fade-in animation to elements */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Animation delays */
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-600 {
+  animation-delay: 0.6s;
+}
+
+.delay-900 {
+  animation-delay: 0.9s;
+}
+
+/* Container for the pulsing SVG image */
+.pulse-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  perspective: 1000px;
+}
+
+/* Title container */
+.title-container {
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Description container */
+.description-container {
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Fix for RTL languages to maintain consistent layout */
+.rtl-support {
+  width: 100%;
+  min-height: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* RTL and LTR direction classes */
+.rtl {
+  direction: rtl;
+}
+
+.ltr {
+  direction: ltr;
+}
+
+/* Title line styling */
+.title-line {
+  line-height: 1.2;
+  min-height: 1.2em;
+  width: 100%;
+  display: block;
+}
+
+/* Consistent button size regardless of text length */
+.consistent-button {
+  min-width: 10rem;
+  height: 3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Special animation for the date highlight */
+@keyframes softGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(100, 127, 47, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(100, 127, 47, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(100, 127, 47, 0.3);
+  }
+}
+
+/* Make date text red */
+.highlight-date {
+  color: #e70606b3 !important;
+  animation: softGlow 3s infinite alternate;
+  transition: all 0.3s ease;
+}
+
+.highlight-date:hover {
+  transform: scale(1.05);
+  background-color: rgba(100, 127, 47, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .pulse-container {
+    margin-bottom: 1rem;
+  }
+
+  .rtl-support {
+    font-size: 1.5rem;
+  }
+
+  .highlight-date {
+    font-size: 1rem;
+  }
+
+  .main-container {
+    padding: 1.5rem;
   }
 }
