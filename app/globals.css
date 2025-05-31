@@ -8,13 +8,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 2rem;
   width: 100%;
   max-width: 42rem;
   margin: 0 auto;
   text-align: center;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.5); /* 60% transparent white */
+  backdrop-filter: blur(
+    1px
+  ); /* Add subtle blur effect for better readability */
   border-radius: 1rem;
   box-shadow: 0 20px 50px rgba(100, 127, 47, 0.3);
   transform: translateZ(0);
@@ -93,13 +96,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 2rem;
   perspective: 1000px;
 }
 
 /* Title container */
 .title-container {
-  height: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,11 +109,9 @@
 
 /* Description container */
 .description-container {
-  height: 10rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.5rem;
 }
 
 /* Fix for RTL languages to maintain consistent layout */
@@ -179,7 +178,7 @@
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .pulse-container {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   .rtl-support {
@@ -192,5 +191,43 @@
 
   .main-container {
     padding: 1.5rem;
+    height: 550px;
   }
+}
+
+@keyframes sanabilPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* Container for the pulsing Sanabil SVG */
+
+/* Apply pulse animation to Sanabil SVG image */
+.sanabil-pulse-image {
+  animation: sanabilPulse 4s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+/* Background image styling */
+.bg-page-wrapper {
+  background-image: url("/images/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+/* Make sure the container is above the background */
+.bg-page-wrapper > div {
+  position: relative;
+  z-index: 1;
 }

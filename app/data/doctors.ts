@@ -22,59 +22,401 @@ export interface Doctor {
 export const doctors: Doctor[] = [
   {
     id: 1,
-    image: "/images/doctor1.png",
+    image: "/images/doctors/mekkim.png",
     name: {
-      fr: "Dr. Karim Bensouda",
-      en: "Dr. Karim Bensouda",
-      ar: "د. كريم بنسودة",
+      fr: "MEKKI Mustapha",
+      en: "MEKKI Mustapha",
+      ar: "مكي مصطفى",
     },
     role: {
-      fr: "Cardiologue",
-      en: "Cardiologist",
-      ar: "طبيب قلب",
+      fr: "Anesthésiste-réa",
+      en: "Anesthesiologist-Intensivist",
+      ar: "أخصائي تخدير ورعاية مركزة",
     },
     bio: {
-      fr: "Dr. Bensouda est un cardiologue expérimenté avec plus de 15 ans de pratique. Spécialisé dans les maladies cardiovasculaires, il a réalisé plus de 500 interventions chirurgicales avec un taux de réussite exceptionnel.",
-      en: "Dr. Bensouda is an experienced cardiologist with over 15 years of practice. Specialized in cardiovascular diseases, he has performed more than 500 surgical interventions with an exceptional success rate.",
-      ar: "د. بنسودة هو طبيب قلب ذو خبرة تزيد عن 15 عامًا. متخصص في أمراض القلب والأوعية الدموية، وقد أجرى أكثر من 500 تدخل جراحي بمعدل نجاح استثنائي.",
+      fr: "",
+      en: "",
+      ar: "",
     },
   },
   {
     id: 2,
-    image: "/images/doctor2.png",
+    image: "/images/doctors/hammoud.png",
     name: {
-      fr: "Dr. Leila Tazi",
-      en: "Dr. Leila Tazi",
-      ar: "د. ليلى التازي",
+      fr: "HAMMOUD Renaud",
+      en: "HAMMOUD Renaud",
+      ar: "حمود رينو",
     },
     role: {
-      fr: "Neurologue",
-      en: "Neurologist",
-      ar: "طبيبة أعصاب",
+      fr: "Chirurgien viscéral",
+      en: "Visceral Surgeon",
+      ar: "جراح",
     },
     bio: {
-      fr: "Dr. Tazi est une neurologue renommée, spécialisée dans le traitement des troubles neurologiques complexes. Elle a contribué à plusieurs publications scientifiques et participe régulièrement à des conférences internationales.",
-      en: "Dr. Tazi is a renowned neurologist, specialized in treating complex neurological disorders. She has contributed to several scientific publications and regularly participates in international conferences.",
-      ar: "د. التازي هي طبيبة أعصاب مشهورة، متخصصة في علاج اضطرابات الجهاز العصبي المعقدة. ساهمت في العديد من المنشورات العلمية وتشارك بانتظام في المؤتمرات الدولية.",
+      fr: "",
+      en: "",
+      ar: "",
     },
   },
   {
     id: 3,
-    image: "/images/doctor3.jpg",
+    image: "/images/doctors/youssouf.png",
     name: {
-      fr: "Dr. Youssef Alami",
-      en: "Dr. Youssef Alami",
-      ar: "د. يوسف العلمي",
+      fr: "KOUIDRAT Youssef",
+      en: "KOUIDRAT Youssef",
+      ar: "قويدرات يوسف",
     },
     role: {
-      fr: "Orthopédiste",
-      en: "Orthopedist",
-      ar: "جراح عظام",
+      fr: "Diabétologue",
+      en: "Diabetologist",
+      ar: "أخصائي أمراض السكري",
     },
     bio: {
-      fr: "Dr. Alami est un orthopédiste de renom avec une expertise particulière en chirurgie du genou et de la hanche. Il utilise des techniques mini-invasives pour assurer une récupération rapide et optimale de ses patients.",
-      en: "Dr. Alami is a renowned orthopedist with particular expertise in knee and hip surgery. He uses minimally invasive techniques to ensure fast and optimal recovery for his patients.",
-      ar: "د. العلمي هو جراح عظام مشهور مع خبرة خاصة في جراحة الركبة والورك. يستخدم تقنيات الحد الأدنى من التدخل الجراحي لضمان التعافي السريع والأمثل لمرضاه.",
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 4,
+    image: "/images/doctors/othmane.png",
+    name: {
+      fr: "BOUZOUAID Othmane",
+      en: "BOUZOUAID Othmane",
+      ar: "بوزوايد عثمان",
+    },
+    role: {
+      fr: "Hépato-Gastro-Entérologue",
+      en: "Hepatogastroenterologist",
+      ar: "أخصائي جهاز هضمي وكبد",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 5,
+    image: "/images/doctors/mehadji.png",
+    name: {
+      fr: "MEHADJI Hakim",
+      en: "MEHADJI Hakim",
+      ar: "مهاجي حكيم",
+    },
+    role: {
+      fr: "IADE",
+      en: "Nurse Anesthetist",
+      ar: "ممرض تخدير",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 6,
+    image: "/images/doctors/sorya.png",
+    name: {
+      fr: "MAKRI Sorya",
+      en: "MAKRI Sorya",
+      ar: "مقري صورية",
+    },
+    role: {
+      fr: "IBODE",
+      en: "Operating Room Nurse",
+      ar: "ممرضة غرفة عمليات",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 7,
+    image: "/images/doctors/djamila.png",
+    name: {
+      fr: "HEND Djamila",
+      en: "HEND Djamila",
+      ar: "هند جميلة",
+    },
+    role: {
+      fr: "Infirmière soins",
+      en: "Care Nurse",
+      ar: "ممرضة رعاية",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 8,
+    image: "/images/doctors/adda.png",
+    name: {
+      fr: "ADDA Hacene",
+      en: "ADDA Hacene",
+      ar: "عدة حسن",
+    },
+    role: {
+      fr: "Néphrologue",
+      en: "Nephrologist",
+      ar: "أخصائي كلى",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 9,
+    image: "/images/doctors/bachakh.png",
+    name: {
+      fr: "BACHAKH Abdallah",
+      en: "BACHAKH Abdallah",
+      ar: "بشاخ عبد الله",
+    },
+    role: {
+      fr: "Ophthalmologue",
+      en: "Ophthalmologist",
+      ar: "أخصائي طب العيون",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 10,
+    image: "/images/doctors/aissa.png",
+    name: {
+      fr: "KERKOUB Aissa",
+      en: "KERKOUB Aissa",
+      ar: "كركوب عيسى",
+    },
+    role: {
+      fr: "Pédiatre",
+      en: "Pediatrician",
+      ar: "أخصائي أطفال",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 11,
+    image: "/images/doctors/dalila.png",
+    name: {
+      fr: "GUEMROUD Dalila",
+      en: "GUEMROUD Dalila",
+      ar: "قرمود دليلة",
+    },
+    role: {
+      fr: "Puéricultrice",
+      en: "Pediatric Nurse",
+      ar: "ممرضة أطفال",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 12,
+    image: "/images/doctors/zeghlache.png",
+    name: {
+      fr: "ZEGHLACHE Khadra",
+      en: "ZEGHLACHE Khadra",
+      ar: "زغلاش خضرة",
+    },
+    role: {
+      fr: "Psychiatre",
+      en: "Psychiatrist",
+      ar: "أخصائية نفسية",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 13,
+    image: "/images/doctors/fatima.png",
+    name: {
+      fr: "HELLAL Fatima",
+      en: "HELLAL Fatima",
+      ar: "هلال فاطمة",
+    },
+    role: {
+      fr: "Radiologue",
+      en: "Radiologist",
+      ar: "أخصائية أشعة",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 14,
+    image: "/images/doctors/hellal.png",
+    name: {
+      fr: "HELLAL Noureddine",
+      en: "HELLAL Noureddine",
+      ar: "هلال نور الدين",
+    },
+    role: {
+      fr: "Radiologue",
+      en: "Radiologist",
+      ar: "أخصائي أشعة",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 15,
+    image: "/images/doctors/draou.png",
+    name: {
+      fr: "DRAOU Mohamed",
+      en: "DRAOU Mohamed",
+      ar: "دراعو محمد",
+    },
+    role: {
+      fr: "Rhumatologue",
+      en: "Rheumatologist",
+      ar: "أخصائي أمراض الروماتيزم",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 16,
+    image: "/images/doctors/houaria.png",
+    name: {
+      fr: "HELLAL Houaria",
+      en: "HELLAL Houaria",
+      ar: "هلال هوارية",
+    },
+    role: {
+      fr: "Sage-Femme",
+      en: "Midwife",
+      ar: "قابلة",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 17,
+    image: "/images/doctors/bouchareb.png",
+    name: {
+      fr: "BOUCHAREB Fatiha",
+      en: "BOUCHAREB Fatiha",
+      ar: "بوشارب فتيحة",
+    },
+    role: {
+      fr: "Secrétaire Médicale",
+      en: "Medical Secretary",
+      ar: "سكرتيرة طبية",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 18,
+    image: "/images/doctors/mokdadi.png",
+    name: {
+      fr: "MOKDADI Abdelkrim",
+      en: "MOKDADI Abdelkrim",
+      ar: "مقدادي عبد الكريم",
+    },
+    role: {
+      fr: "Urgentiste",
+      en: "Emergency Physician",
+      ar: "أخصائي طوارئ",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 19,
+    image: "/images/doctors/soulimane.png",
+    name: {
+      fr: "SOULIMANE Benamar",
+      en: "SOULIMANE Benamar",
+      ar: "سليمان بن عمر",
+    },
+    role: {
+      fr: "Urologue",
+      en: "Urologist",
+      ar: "أخصائي مسالك بولية",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 20,
+    image: "/images/doctors/mekkiy.png",
+    name: {
+      fr: "MEKKI Yahia",
+      en: "MEKKI Yahia",
+      ar: "مكي يحي",
+    },
+    role: {
+      fr: "Virologue",
+      en: "Virologist",
+      ar: "أخصائي فيروسات",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
+    },
+  },
+  {
+    id: 21,
+    image: "/images/doctors/zohra.png",
+    name: {
+      fr: "BALEHOUANE Zohra",
+      en: "BALEHOUANE Zohra",
+      ar: "بلهوان زهرة",
+    },
+    role: {
+      fr: "Cadre imagerie",
+      en: "Imaging Manager",
+      ar: "مسؤولة التصوير الطبي",
+    },
+    bio: {
+      fr: "",
+      en: "",
+      ar: "",
     },
   },
 ];

@@ -134,6 +134,13 @@ export default function RealisationsSection({
   // Uniform green color gradient for all specialities
   const greenGradient = "from-[#647F2F] to-[#7B934C]";
 
+  // Fonction pour déterminer la taille du texte en fonction de la longueur
+  const getTextSizeClass = (text: string) => {
+    if (text.length > 150) return "text-sm";
+    if (text.length > 100) return "text-base";
+    return "text-lg";
+  };
+
   return (
     <div
       ref={sectionRef}
@@ -182,27 +189,37 @@ export default function RealisationsSection({
               </div>
 
               {/* Content */}
-              <div className="relative h-full p-8 flex flex-col md:flex-row items-center">
+              <div className="relative h-full p-4 md:p-6 flex flex-col md:flex-row items-center">
                 {/* Statistics */}
-                <div className="w-full md:w-1/3 mb-6 md:mb-0 flex justify-center">
-                  <div className="p-6 text-center">
-                    <motion.span
-                      className="text-6xl font-bold text-white drop-shadow-lg"
-                      key={`counter-${activeSlide}`}
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
-                    >
-                      {counters[activeSlide]}
-                      {currentAchievement.suffix}
-                    </motion.span>
+                <div className="w-full md:w-1/3 mb-4 md:mb-0 flex justify-center">
+                  <div className="p-4 text-center">
+                    {currentAchievement.hideValue ? (
+                      <motion.div
+                        className="text-white drop-shadow-lg"
+                        key={`icon-${activeSlide}`}
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                      ></motion.div>
+                    ) : (
+                      <motion.span
+                        className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg"
+                        key={`counter-${activeSlide}`}
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                      >
+                        {counters[activeSlide]}
+                        {currentAchievement.suffix}
+                      </motion.span>
+                    )}
                   </div>
                 </div>
 
                 {/* Description */}
-                <div className="w-full md:w-2/3 md:pl-8 flex flex-col justify-center">
+                <div className="w-full md:w-2/3 md:pl-6 flex flex-col justify-center">
                   <motion.h3
-                    className="text-2xl font-semibold text-white mb-3 drop-shadow-lg"
+                    className="text-xl md:text-2xl font-semibold text-white mb-2 drop-shadow-lg line-clamp-2"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
@@ -211,7 +228,9 @@ export default function RealisationsSection({
                   </motion.h3>
 
                   <motion.p
-                    className="text-white/90 text-lg drop-shadow-md"
+                    className={`text-white/90 ${getTextSizeClass(
+                      currentDescription
+                    )} drop-shadow-md overflow-y-auto max-h-[150px] md:max-h-[200px] scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.4 }}
@@ -272,14 +291,14 @@ export default function RealisationsSection({
       </div>
 
       {/* Pagination dots */}
-      <div className="flex justify-center space-x-2">
+      <div className="flex justify-center space-x-2 overflow-x-auto py-2">
         {achievements.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 flex-shrink-0 ${
               index === activeSlide
-                ? "bg-[#647F2F] dark:bg-[#7B934C] w-8"
+                ? "bg-[#647F2F] dark:bg-[#7B934C] w-6 md:w-8"
                 : "bg-gray-300 dark:bg-gray-600"
             }`}
             aria-label={`Go to achievement ${index + 1}`}

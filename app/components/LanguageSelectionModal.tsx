@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Changa } from "next/font/google";
+import Loading from "./Loading"; // Importez le composant Loading
 
 // Initialize the Changa font
 const changa = Changa({
@@ -30,13 +31,14 @@ export default function LanguageSelectionModal({
 }: LanguageSelectionModalProps) {
   const router = useRouter();
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false); // État pour suivre le chargement
 
   const languages: Language[] = [
     {
       code: "ar",
       name: "Arabic",
       nativeName: "العربية",
-      flag: "/images/flags/ar.svg",
+      flag: "/images/flags/dz.svg",
     },
     {
       code: "fr",
@@ -54,13 +56,19 @@ export default function LanguageSelectionModal({
 
   const handleLanguageSelect = (languageCode: string) => {
     setSelectedLanguage(languageCode);
+    setIsLoading(true); // Activer l'écran de chargement
 
-    // Navigate to register page with language and testimonials parameters
+    // Naviguer vers la page d'inscription avec les paramètres de langue et de témoignages
     setTimeout(() => {
       router.push(`/register?lang=${languageCode}&showTestimonials=true`);
-      onClose();
-    }, 300); // Short delay for visual feedback
+      // Ne pas fermer la modale ici, elle sera remplacée par l'écran de chargement
+    }, 300); // Court délai pour le retour visuel
   };
+
+  // Si le chargement est actif, afficher l'écran de chargement
+  if (isLoading) {
+    return <Loading />;
+  }
 
   if (!isOpen) return null;
 
@@ -115,9 +123,6 @@ export default function LanguageSelectionModal({
                     className={`font-medium text-[#647F2F] dark:text-[#7B934C]`}
                   >
                     {language.nativeName}
-                  </p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {language.name}
                   </p>
                 </div>
                 <div

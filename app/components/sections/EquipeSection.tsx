@@ -40,6 +40,7 @@ interface DoctorComponentProps {
 
 const DoctorComponent = ({ doctor, language }: DoctorComponentProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const isRTL = language === "ar";
 
   // Get the current language or default to French
@@ -54,6 +55,36 @@ const DoctorComponent = ({ doctor, language }: DoctorComponentProps) => {
   const viewProfile = equipeTranslations.viewProfile[currentLanguage];
   const contact = equipeTranslations.contact[currentLanguage];
   const schedule = equipeTranslations.schedule[currentLanguage];
+
+  // Generate initials from name
+  const getInitials = () => {
+    // Use French name as default for generating initials
+    const nameParts = doctor.name.fr.split(" ");
+    if (nameParts.length >= 2) {
+      // Get first letter of first name and first letter of last name
+      return `${nameParts[0][0]}${nameParts[1][0]}`.toUpperCase();
+    } else if (nameParts.length === 1) {
+      // If only one name part, use first two letters
+      return nameParts[0].substring(0, 2).toUpperCase();
+    } else {
+      return "DR";
+    }
+  };
+
+  // Generate a consistent background color based on doctor ID
+  const getAvatarColor = () => {
+    const colors = [
+      "bg-blue-500",
+      "bg-green-500",
+      "bg-yellow-500",
+      "bg-purple-500",
+      "bg-pink-500",
+      "bg-indigo-500",
+      "bg-red-500",
+      "bg-teal-500",
+    ];
+    return colors[doctor.id % colors.length];
+  };
 
   return (
     <motion.div
@@ -84,13 +115,22 @@ const DoctorComponent = ({ doctor, language }: DoctorComponentProps) => {
               : "w-24 h-24 mb-4"
           } rounded-full overflow-hidden border-4 border-[#7B934C]/20`}
         >
-          <Image
-            src={doctor.image}
-            alt={name}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 96px, 128px"
-          />
+          {!imageError ? (
+            <Image
+              src={doctor.image}
+              alt={name}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 96px, 128px"
+              onError={() => setImageError(true)}
+            />
+          ) : (
+            <div
+              className={`w-full h-full flex items-center justify-center text-white font-bold text-xl ${getAvatarColor()}`}
+            >
+              {getInitials()}
+            </div>
+          )}
         </motion.div>
 
         <motion.div layout className={isExpanded ? "flex-1" : "text-center"}>
